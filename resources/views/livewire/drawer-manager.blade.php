@@ -1,5 +1,11 @@
 <div>
-    @if($modalComponent)
-        <x-drawer :modal-component="$modalComponent" :modal-expand="$modalExpand" :modal-data="$modalData" :modal-title="$modalTitle"/>
-    @endif
+    @foreach($modalComponents as $index => $modalComponent)
+        <x-drawer
+            :modal-component="$modalComponent"
+            :modal-expand="$modalExpands[$index]"
+            :modal-data="$modalData[$index]"
+            :modal-title="$modalTitles[$index]"
+            :index="$index"
+        />
+    @endforeach
 </div>
