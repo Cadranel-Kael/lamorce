@@ -17,7 +17,14 @@
                 amount="{{ $collection->amount }}"
                 desc="{{ $collection->description }}"
                 x-data
-                x-on:click="$dispatch('openModal', {component: 'finances.collections.show', data: {collection:{{ $collection->id }}}, title: '{{ $collection->name }}'})"/>
+                x-on:click="$dispatch(
+                    'openModal', {
+                    component: 'finances.collections.show',
+                     expand: true,
+                     data: {collection:{{ $collection->id }}},
+                     title: '{{ $collection->name }}'
+                     }
+                     )"/>
         @endforeach
     </div>
 </x-app-layout>
