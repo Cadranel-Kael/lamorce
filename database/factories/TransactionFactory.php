@@ -15,7 +15,7 @@ class TransactionFactory extends Factory
     {
         return [
             'name' => $this->faker->words(2, true),
-            'amount' => $this->faker->randomFloat(2, 0, 1000),
+            'amount' => $this->faker->randomNumber(4),
             'date_time' => $this->faker->dateTime(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
