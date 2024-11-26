@@ -8,9 +8,14 @@ use Livewire\Component;
 
 class TransactionForm extends Component
 {
-    public $from;
-    public $to;
+    public $from = 1;
+    public $to = 2;
     public $amount;
+
+    public function switchCollections()
+    {
+        list($this->from, $this->to) = [$this->to, $this->from];
+    }
 
     #[Computed]
     public function fromCollection() {
