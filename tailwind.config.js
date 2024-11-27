@@ -1,5 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
+import tailwindCssAnimated from 'tailwindcss-animated';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -11,6 +12,16 @@ export default {
 
     theme: {
         extend: {
+            animation: {
+                'slide-in-left': 'slide-in-left 0.3s ease-in-out',
+                'slide-out-left': 'slide-in-left 0.3s ease-in-out reverse',
+            },
+            keyframes: {
+                'slide-in-left': {
+                    '0%': { transform: 'translateX(100%)' },
+                    '100%': { transform: 'translateX(0)'},
+                },
+            },
             fontFamily: {
                 sans: ['Rubik', ...defaultTheme.fontFamily.sans],
             },
@@ -118,5 +129,8 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+        tailwindCssAnimated,
+    ],
 };
