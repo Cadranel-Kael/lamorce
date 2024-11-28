@@ -21,7 +21,7 @@
                 </div>
                 <div x-data x-sort class="flex gap-6 overflow-x-auto max-w-full">
                     @foreach($type->collections as $collection)
-                        <x-account-card key="accounts" x-sort:accounts :collection="$collection->name" :amount="$collection->amount"
+                        <x-account-card key="accounts" :collection="$collection->name" :amount="$collection->amount"
                                         :link="route('finances.collections.show', $collection->id)"/>
                     @endforeach
                 </div>

@@ -2,7 +2,9 @@
     <a class="font-bold" href="{{ route($route) }}" wire:navigate>
         {{ $slot }}
     </a>
-    <ul>
-        @yield('link-nav')
-    </ul>
+    @if(request()->routeIs($route))
+        <ul>
+            {{ $linkNav ?? '' }}
+        </ul>
+    @endif
 </li>

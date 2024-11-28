@@ -8,6 +8,8 @@ class ContactController
 {
     public function index()
     {
-        return Contact::all();
+        return view('contacts.index', [
+            'contacts' => Contact::all(),
+        ]);
     }
 }

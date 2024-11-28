@@ -20,6 +20,6 @@ class Contact extends Model
 
     public function address(): HasOne
     {
-        return $this->hasOne(Address::class, 'address_id');
+        return $this->hasOne(Address::class, 'id', 'address_id');
     }
 }
