@@ -131,6 +131,5 @@ export default {
 
     plugins: [
         forms,
-        tailwindCssAnimated,
     ],
 };
