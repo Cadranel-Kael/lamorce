@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Concerns\HasModal;
+use App\Concerns\HasDrawer;
 use App\Models\Collection;
 use App\Models\Transaction;
 use Barryvdh\Debugbar\Facades\Debugbar;
@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class CollectionController extends Controller
 {
-    use HasModal;
+    use HasDrawer;
 
     public function click()
     {

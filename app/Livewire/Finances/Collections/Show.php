@@ -2,14 +2,14 @@
 
 namespace App\Livewire\Finances\Collections;
 
-use App\Concerns\HasModal;
+use App\Concerns\HasDrawer;
 use App\Models\Collection;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Livewire\Component;
 
 class Show extends Component
 {
-    use HasModal;
+    use HasDrawer;
 
     public $collection;
     public $transactions;

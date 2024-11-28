@@ -2,15 +2,17 @@
 
 namespace App\Livewire;
 
-use App\Concerns\HasModal;
+use App\Concerns\HasDrawer;
 use Barryvdh\Debugbar\Facades\Debugbar;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class DrawerManager extends Component
 {
-    use HasModal;
+    use HasDrawer;
 
     protected $listeners = ['openModal', 'closeModal'];
+
 
     public function render()
     {
