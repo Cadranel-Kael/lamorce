@@ -1,66 +1,158 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# L'amorce Management Web Application
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This repository contains the source code for a **web application** designed to streamline the internal management of the non-profit, [l'amorce](https://lamorce.be/). The application aims to centralize and automate key processes, ensuring transparency, accuracy, and efficiency in managing funds, donations, and other operational tasks.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 **Table of Contents**
+- [Context](#context)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Database Schema](#database-schema)
+- [Contributing](#contributing)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🌍 **Context**
 
-## Learning Laravel
+The foundation is entirely run by volunteers and lacks salaried staff. Over time, the internal management has relied on a variety of tools and workflows familiar to individual volunteers, leading to a fragmented and labor-intensive system.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+This application addresses the following issues:
+- Centralizing tools to simplify internal operations.
+- Reducing manual effort through automation.
+- Ensuring tasks are easy to understand and delegate.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ✨ **Features**
 
-## Laravel Sponsors
+### **Fund Management**
+- Manage virtual funds, including:
+    - General fund
+    - Operational fund
+    - Specific funds for collectives/associations
+- Support fund creation, closure, and inter-fund transfers.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### **Donation Tracking**
+- Import and process bank statements (CSV format) to track donations.
+- Avoid duplicate transactions during CSV imports.
+- Enable manual donation entries for offline contributions.
 
-### Premium Partners
+### **Anonymity & Privacy**
+- Anonymize donor information to ensure confidentiality.
+- Process CSV data in-memory without saving sensitive details.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### **Automation Strategies**
+- Auto-classify donations using:
+    - Recognized bank account numbers.
+    - Frequent banking references (e.g., project-specific tags).
+- Manual review for ambiguous or unrecognized transactions.
 
-## Contributing
+### **Randomized Selection for Decision Committees**
+- Automate random selection of donors or collectives for specific tasks, adhering to predefined eligibility criteria.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### **Data Transparency**
+- Track and log all modifications to ensure transparency and prevent errors.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🛠 **Technologies Used**
+- **Backend:** Laravel, PHP
+- **Frontend:** Blade, Tailwind CSS, Alpine.js, Livewire
+- **Database:** MySQL
+- **Others:** Git, GitHub, Composer
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🚀 **Installation**
 
-## License
+### Prerequisites
+- PHP 7.2+
+- Composer
+- NPM or Yarn
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Cadranel-Kael/lamorce.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd lamorce
+   ```
+3. Install dependencies:
+   ```bash
+    composer install
+    npm install
+   ```
+4. Set up environment variables:
+    - Copy `.env.example` to `.env`:
+      ```bash
+      cp .env.example .env
+      ```
+    - Configure database and other settings in `.env`.
+5. Run migrations to set up the database:
+   ```bash
+   php artisan migrate
+   ```
+6. Seed the database with sample data (optional):
+   ```bash
+   php artisan db:seed
+   ```
+7.Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## 📖 **Usage**
+
+1. Log in with administrator credentials to manage funds, transactions, and users.
+2. Import CSV files for bank statements and verify transactions.
+3. Access fund summaries, donor records, and expense details in the dashboard.
+
+---
+
+## 🗂 **Database Schema**
+
+### Example Tables
+- `users`: Stores volunteer and admin information.
+- `funds`: Tracks virtual fund details and balances.
+- `transactions`: Logs incoming/outgoing payments.
+- `donations`: Tracks anonymized donation records.
+- `mandates`: Tracks committee member assignments.
+
+---
+
+## 🤝 **Contributing**
+
+Contributions are welcome! Please follow these steps:
+1. Fork the repository.
+2. Create a feature branch:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add new feature"
+   ```
+4. Push to your fork:
+   ```bash
+   git push origin feature-name
+   ```
+5. Create a pull request.
+
+---
+
+## 🧑‍💻 **Contact**
+
+For questions, suggestions, or support, please contact:
+- **Kael Cadranel**
+- GitHub: [Cadranel-Kael](https://github.com/Cadranel-Kael)
+- Website: [kael.digital](https://kael.digital/)
+
+---  
+
