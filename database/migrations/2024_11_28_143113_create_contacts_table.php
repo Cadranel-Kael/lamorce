@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('bank_account')->nullable();
-            $table->foreignId('address_id')->nullable();
+            $table->foreignId('address_id')->constrained('addresses')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

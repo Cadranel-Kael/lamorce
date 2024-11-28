@@ -21,7 +21,7 @@ class ContactFactory extends Factory
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
-            'address_id' => Address::factory(),
+            'address_id' => Address::factory()->create()->id,
         ];
     }
 }

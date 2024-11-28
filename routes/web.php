@@ -26,6 +26,10 @@ Route::get('detentes/overview', [\App\Http\Controllers\detenteController::class,
     ->middleware(['auth'])
     ->name('detentes.overview');
 
+Route::resource('contacts', \App\Http\Controllers\ContactController::class)
+    ->middleware(['auth'])
+    ->name('show', 'contacts.show');
+
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');

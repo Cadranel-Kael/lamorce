@@ -19,8 +19,6 @@ class AddressFactory extends Factory
             'street' => $this->faker->streetName(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-
-            'contact_id' => Contact::factory(),
         ];
     }
 }

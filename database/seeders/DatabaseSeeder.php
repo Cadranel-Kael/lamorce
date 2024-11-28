@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Account;
+use App\Models\Address;
 use App\Models\Collection;
 use App\Models\CollectionType;
 use App\Models\Contact;
@@ -45,11 +46,13 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Project collection',
             ]);
 
+
         Detente::factory(10)->create();
 
 
         Account::factory(1)->create();
 
         Contact::factory(10)->create();
+
     }
 }

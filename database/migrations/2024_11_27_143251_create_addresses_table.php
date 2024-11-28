@@ -9,7 +9,6 @@ return new class extends Migration {
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contact_id');
             $table->string('country')->nullable();
             $table->string('postal_code')->nullable();
             $table->string('street')->nullable();
