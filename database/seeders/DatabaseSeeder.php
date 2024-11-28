@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Account;
 use App\Models\Collection;
 use App\Models\CollectionType;
+use App\Models\Contact;
 use App\Models\Detente;
 use App\Models\Transaction;
 use App\Models\User;
@@ -48,5 +49,7 @@ class DatabaseSeeder extends Seeder
 
 
         Account::factory(1)->create();
+
+        Contact::factory(10)->create();
     }
 }
