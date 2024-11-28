@@ -8,7 +8,7 @@
                class="underline hover:underline">{{ __('Collections') }}</a></li>
     @endslot
     <div class="grid grid-cols-2 gap-7">
-        @foreach($collections as $collection)
+    @foreach($collections as $collection)
             <x-account-card
                 collection="{{ $collection->name }}"
                 :showStatus="true"
@@ -19,10 +19,16 @@
                 x-data
                 x-on:click="$dispatch(
                     'openModal', {
-                    component: 'finances.collections.show',
-                     expand: true,
-                     data: {collection:{{ $collection->id }}},
-                     title: '{{ $collection->name }}'
+                        component: 'finances.collections.show',
+                        expand: true,
+                        data: {collection:{{ $collection->id }}},
+                        title: '{{ $collection->name }}',
+                        type: 'drawer',
+                        'edit': {
+                            component: 'collection-edit',
+                            title: '{{ __('Edit') . ' ' . $collection->name }}',
+                            data: {collection_id:{{ json_encode($collection->id) }}}
+                        }
                      }
                      )"/>
         @endforeach

@@ -2,7 +2,7 @@
     <div class="flex gap-4">
         <h2 class="flex-grow text-xl font-bold">{{ __('Total') }}</h2>
         <x-button-black>{{ __('Import from file') }}</x-button-black>
-        <x-button wire:click.prevent="$dispatch('openModal', {component: 'transaction-form'})">{{ __('New transfer') }}</x-button>
+        <x-button wire:click.prevent="$dispatch('openModal', {component: 'transaction-form', confirm: true})">{{ __('New transfer') }}</x-button>
     </div>
     <div class="text-5xl">{{ format_currency($total) }} €</div>
     @if($collectionsTotal)
