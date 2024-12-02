@@ -17,6 +17,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased">
+@php($currentSection = request()->route()->getName())
 <div class="min-h-screen bg-background">
     <div class="flex min-w-screen">
         <nav class="min-h-screen w-fit z-20 fixed h-full bg-white pt-11 px-7 shadow">
@@ -46,38 +47,40 @@
         <div class="w-full">
             @livewire('nav-top')
 
-        <!-- Page Content -->
-        <main class="flex-grow py-12 max-w-7xl mx-auto sm:px-6 lg:px-8 relative">
-            @livewire('drawer-manager')
-            @isset($back)
-                <a href="{{ url()->previous()}}" class="hover:underline">{{ __('Back') }}</a>
-            @endisset
-            <div class="mb-9 flex items-center">
-                <div class="flex-grow">
-                    @isset($title)
-                        <div class="font-bold text-5xl">
-                            {{ $title }}
-                        </div>
-                    @endisset
-                    @isset($subTitle)
-                        <div class="text-gray-500">
-                            {{ $subTitle }}
+            <!-- Page Content -->
+            <main class="py-12 max-w-7xl ml-72 mx-auto sm:px-6 lg:px-8 relative">
+                @livewire('drawer-manager')
+
+                @isset($back)
+                    <a href="{{ url()->previous()}}" class="hover:underline">{{ __('Back') }}</a>
+                @endisset
+                <div class="mb-9 flex items-center">
+                    <div class="flex-grow">
+                        @isset($title)
+                            <div class="font-bold text-5xl">
+                                {{ $title }}
+                            </div>
+                        @endisset
+                        @isset($subTitle)
+                            <div class="text-gray-500">
+                                {{ $subTitle }}
+                            </div>
+                        @endisset
+                    </div>
+                    @isset($actions)
+                        <div class="gap-4 flex items-start">
+                            {{ $actions }}
                         </div>
                     @endisset
                 </div>
-                @isset($actions)
-                    <div class="gap-4 flex items-start">
-                        {{ $actions }}
-                    </div>
+                @isset($subMenu)
+                    <ul class="font-bold flex gap-9 mb-7">
+                        {{ $subMenu }}
+                    </ul>
                 @endisset
-            </div>
-            @isset($subMenu)
-                <ul class="font-bold flex gap-9 mb-7">
-                    {{ $subMenu }}
-                </ul>
-            @endisset
-            {{ $slot }}
-        </main>
+                {{ $slot }}
+            </main>
+        </div>
     </div>
 </div>
 @livewireScriptConfig
