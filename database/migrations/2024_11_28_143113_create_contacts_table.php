@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->string('phone')->nullable();
             $table->string('bank_account')->nullable();
             $table->foreignId('address_id')->constrained('addresses')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
