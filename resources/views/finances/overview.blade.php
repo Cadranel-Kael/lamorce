@@ -15,7 +15,7 @@
                     <h2 class="text-4xl mr-6">{{ $type->name }}</h2>
                     <x-button-primary
                         x-data
-                        x-on:click="$dispatch('openModal', {component: 'collection-create', data: {type:{{ $type->id }}}})">
+                        x-on:click="$dispatch('openModal', {title: '{{ __('New collection') }}',component: 'collection-create', data: {type:{{ $type->id }}}})">
                         {{ __('New collection') }}
                     </x-button-primary>
                 </div>
