@@ -38,19 +38,9 @@
                 <x-link-nav route="detentes.overview">
                     Détentes
                 </x-link-nav>
-                <li>
-                    <a class="font-bold" href="#" wire:navigate>Users</a>
-                    <ul>
-                        <li><a href="">New collection</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="font-bold" href="#" wire:navigate>Draws</a>
-                    <ul>
-                        <li><a href="">New transfer</a></li>
-                        <li><a href="">New collection</a></li>
-                    </ul>
-                </li>
+                <x-link-nav route="contacts.index">
+                    Contacts
+                </x-link-nav>
             </ul>
         </nav>
         <div class="w-full">
