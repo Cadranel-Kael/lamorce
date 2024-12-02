@@ -9,9 +9,13 @@ return new class extends Migration {
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->string('country')->nullable();
-            $table->string('postal_code')->nullable();
-            $table->string('street')->nullable();
+            $table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
+            $table->string('postal_code');
+            $table->string('street_name');
+            $table->string('street_number');
+            $table->string('floor')->nullable();
+            $table->string('city');
+            $table->string('state');
             $table->timestamps();
             $table->softDeletes();
         });
