@@ -18,9 +18,8 @@
 </head>
 <body class="font-sans antialiased">
 <div class="min-h-screen bg-background">
-    <livewire:layout.navigation/>
-    <div class="flex">
-        <nav class="bg-white pt-11 px-7">
+    <div class="flex min-w-screen">
+        <nav class="min-h-screen w-fit z-20 fixed h-full bg-white pt-11 px-7 shadow">
             <h2 class="sr-only">{{ __('Side navigation') }}</h2>
             <ul class="flex-col flex gap-4">
                 <li class="text-xl font-bold mb-10"><a href="/">l'amorce</a></li>
@@ -54,6 +53,8 @@
                 </li>
             </ul>
         </nav>
+        <div class="w-full">
+            @livewire('nav-top')
 
         <!-- Page Content -->
         <main class="flex-grow py-12 max-w-7xl mx-auto sm:px-6 lg:px-8 relative">
