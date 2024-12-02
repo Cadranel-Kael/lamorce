@@ -16,6 +16,7 @@ class CountryTranslationFactory extends Factory
         return [
             'language' => $this->faker->word(),
             'name' => $this->faker->name(),
+            'flag_alt' => $this->faker->sentence(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 

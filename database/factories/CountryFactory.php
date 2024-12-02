@@ -15,6 +15,7 @@ class CountryFactory extends Factory
         return [
             'code' => $this->faker->word(),
             'iso3_code' => $this->faker->word(),
+            'flag_url' => $this->faker->url(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

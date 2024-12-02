@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->foreignId('country_id');
             $table->string('language');
             $table->string('name');
+            $table->longText('flag_alt');
             $table->timestamps();
             $table->softDeletes();
         });
