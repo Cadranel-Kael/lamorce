@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .button {
-    @apply p-2 rounded font-bold;
+    @apply px-4 py-1 rounded enabled:shadow;
 }
