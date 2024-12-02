@@ -11,7 +11,7 @@ class CollectionType extends Model
     use SoftDeletes, HasFactory;
 
     protected $fillable = [
-        'Name',
+        'name',
     ];
 
     public function collections()
