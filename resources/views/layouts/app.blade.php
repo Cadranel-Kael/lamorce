@@ -22,14 +22,19 @@
     <div class="flex">
         <nav class="bg-white pt-11 px-7">
             <h2 class="sr-only">{{ __('Side navigation') }}</h2>
-            <ul>
+            <ul class="flex-col flex gap-4">
                 <li class="text-xl font-bold mb-10"><a href="/">l'amorce</a></li>
-                <x-link-nav route="finances.overview">
+                <x-link-nav name="finances" route="finances.overview">
                     Finances
-                    @section('link-nav')
-                        <li><a href="" wire:navigate>New transaction</a></li>
-                        <li><a href="" wire:navigate>New collection</a></li>
-                    @endsection
+                    @slot('linkNav')
+                        <li class="hover:font-bold">
+                            <button class="text-left"
+                                    x-on:click="$dispatch('openModal', {component: 'transaction-form', confirm: true, title: '{{ __('New transfer') }}'})"
+                                    wire:navigate>New transaction
+                            </button>
+                        </li>
+                        <li class="hover:font-bold"><a href="" wire:navigate>New collection</a></li>
+                    @endslot
                 </x-link-nav>
                 <x-link-nav route="detentes.overview">
                     Détentes
