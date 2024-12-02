@@ -3,12 +3,14 @@
 namespace App\Livewire;
 
 use App\Livewire\Forms\CollectionForm;
+use App\Livewire\Forms\CollectionTypeForm;
 use App\Models\CollectionType;
 use Livewire\Component;
 
 class CollectionCreate extends Component
 {
     public CollectionForm $form;
+    public CollectionTypeForm $typeForm;
     public $types;
 
     public function mount($type = null)
@@ -19,6 +21,13 @@ class CollectionCreate extends Component
 
     public function save()
     {
+        $this->form->validate();
+
+        if ($this->form->type === 'new') {
+            $type = $this->typeForm->store();
+            $this->form->type = $type->id;
+        }
+
         $this->form->store();
     }
 
