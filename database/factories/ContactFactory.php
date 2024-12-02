@@ -14,14 +14,14 @@ class ContactFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
             'bank_account' => $this->faker->word(),
+            'address_id' => $this->faker->randomElement([null, Address::factory()->create()->id]),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-
-            'address_id' => Address::factory()->create()->id,
         ];
     }
 }
