@@ -24,15 +24,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
-
         $response = Http::get("https://restcountries.com/v3.1/all?fields=name,cca2,cca3,flags");
 
         foreach ($response->json() as $country) {
             $countryModel = Country::create([
                 'code' => $country['cca2'],
                 'iso3_code' => $country['cca3'],
-                'flag_url' => $country['flags']['png'],
+                'flag_url' => $country['flags']['svg'],
             ]);
 
             CountryTranslation::create([
