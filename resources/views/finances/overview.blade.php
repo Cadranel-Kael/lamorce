@@ -4,7 +4,7 @@
     @endslot
     @slot('subMenu')
         <li><a href="{{ route('finances.overview') }}" class="underline hover:underline">{{ __('Overview') }}</a></li>
-        <li><a href="{{ route('collections.index') }}"
+        <li><a href="{{ route('finances.collections.index') }}"
                class="hover:underline">{{ __('Collections') }}</a></li>
     @endslot
     <livewire:collection-overview :collection="__('Total')" :total="$total" :collections-total="$collectionsTotal"/>
