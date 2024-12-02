@@ -49,10 +49,10 @@ class DatabaseSeeder extends Seeder
 
         Detente::factory(10)->create();
 
-
         Account::factory(1)->create();
 
-        Contact::factory(10)->create();
-
+        Contact::factory(100)->create([
+            'user_id' => 1,
+        ]);
     }
 }
