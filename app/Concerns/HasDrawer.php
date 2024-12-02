@@ -16,6 +16,9 @@ trait HasDrawer
 
     public function openModal(string $component, array $data = [], string $title = '', bool $expand = false, array $edit = [], bool $confirm = true): void
     {
+        if (in_array($component, $this->drawerComponents)) {
+            return;
+        }
         $this->drawerTitles[] = $title;
         $this->drawerExpands[] = $expand;
         $this->drawerComponents[] = $component;
