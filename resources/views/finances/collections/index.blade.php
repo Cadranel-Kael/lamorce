@@ -4,7 +4,7 @@
     @endslot
     @slot('subMenu')
         <li><a href="{{ route('finances.overview') }}" class="hover:underline">{{ __('Overview') }}</a></li>
-        <li><a href="{{ route('collections.index') }}"
+        <li><a href="{{ route('finances.collections.index') }}"
                class="underline hover:underline">{{ __('Collections') }}</a></li>
     @endslot
     <div class="grid grid-cols-2 gap-7">
