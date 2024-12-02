@@ -18,7 +18,8 @@ Route::get('finances/overview', [\App\Http\Controllers\FinancesController::class
 
 Route::resource('finances/collections', \App\Http\Controllers\CollectionController::class)
     ->middleware(['auth'])
-    ->name('show', 'finances.collections.show');
+    ->name('show', 'finances.collections.show')
+    ->name('index', 'finances.collections.index');
 
 Route::redirect('detentes', 'detentes/overview')->name('detentes');
 
