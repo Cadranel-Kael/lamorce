@@ -1,6 +1,6 @@
 @props([
     'type' => 'button',
-    'color' => 'bg-primary text-black hover:bg-black hover:text-primary',
+    'color' => 'bg-white transition-all text-black hover:bg-primary disabled:bg-gray-100 disabled:text-gray-500',
     'attributes' => '',
     ])
 <button {{ $attributes->class(['button', $color]) }} type="{{ $type }}">
