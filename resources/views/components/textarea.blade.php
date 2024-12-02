@@ -7,7 +7,7 @@
     'placeholder' => '',
     'model' => '' ?? $name,
 ])
-<div class="flex-col flex gap-4 {{ $class }}">
+<div class="flex-col flex gap-2 {{ $class }}">
     <label for="{{ $name }}">{{ $label }}@if($required)<span class="text-error-600">*</span>@endif</label>
     <textarea
         x-data="{ resize: () => { $el.style.height = '5px'; $el.style.height = $el.scrollHeight + 'px' } }"
