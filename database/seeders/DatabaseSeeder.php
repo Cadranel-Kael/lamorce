@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Console\Commands\SeedCountries;
 use App\Models\Account;
 use App\Models\Address;
 use App\Models\Collection;
@@ -14,6 +15,7 @@ use App\Models\Transaction;
 use App\Models\User;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
 
 class DatabaseSeeder extends Seeder
@@ -24,22 +26,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $response = Http::get("https://restcountries.com/v3.1/all?fields=name,cca2,cca3,flags");
-
-        foreach ($response->json() as $country) {
-            $countryModel = Country::create([
-                'code' => $country['cca2'],
-                'iso3_code' => $country['cca3'],
-                'flag_url' => $country['flags']['svg'],
-            ]);
-
-            CountryTranslation::create([
-                'country_id' => $countryModel->id,
-                'language' => 'en',
-                'name' => $country['name']['common'],
-                'flag_alt' => $country['flags']['alt'] ?? '',
-            ]);
-        }
+        Artisan::call('seed:countries');
 
         User::factory()->create([
             'name' => 'Test User',
@@ -50,7 +37,7 @@ class DatabaseSeeder extends Seeder
             ->has(
                 Collection::factory()
                     ->count(4)
-                    ->has(Transaction::factory()->count(5))
+                    ->has(Transaction::factory()->count(20))
             )
             ->create([
                 'name' => 'Base collection',
@@ -60,7 +47,7 @@ class DatabaseSeeder extends Seeder
             ->has(
                 Collection::factory()
                     ->count(6)
-                    ->has(Transaction::factory()->count(5))
+                    ->has(Transaction::factory()->count(20))
             )
             ->create([
                 'name' => 'Project collection',
@@ -71,7 +58,7 @@ class DatabaseSeeder extends Seeder
 
         Account::factory(1)->create();
 
-        Contact::factory(100)->create([
+        Contact::factory(200)->create([
             'user_id' => 1,
         ]);
     }
