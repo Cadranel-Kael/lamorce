@@ -18,7 +18,8 @@ trait Searchable
         return $this->search === ''
             ? $query
             : $query
-                ->where('name', 'like', '%' . $this->search . '%')
+                ->where('first_name', 'like', '%' . $this->search . '%')
+                ->orWhere('last_name', 'like', '%' . $this->search . '%')
                 ->orWhere('email', 'like', '%' . $this->search . '%');
     }
 }
