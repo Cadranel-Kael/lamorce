@@ -9,7 +9,12 @@
 <div
     x-ref="drawer"
     x-trap.inert="true"
-    x-data="drawer"
+    x-data="drawer({
+        index: {{ $index }},
+        expand: {{ json_encode($expand) }},
+        href: '{{ Route::has($component) ? route($component, $data) : '#' }}',
+    })"
+
     x-on:keydown.escape="open = false"
     style="z-index: {{ 10 + $index }}"
     class="relative"
@@ -66,29 +71,23 @@
 
 @script
 <script>
-    const index = {{ $index }};
-    const expand = {{ $expand }};
-    if (expand) {
-        const href = '{{ route($component, $data) }}';
-        console.log(href);
-    }
-
-    Alpine.data('drawer', () => {
+    Alpine.data('drawer', (config) => {
         return {
             open: true,
-
             expanded: false,
+            index: config.index,
+            expand: config.expand,
+            href: config.href,
 
             closeDrawer() {
                 this.open = false;
             },
 
             init() {
-                console.log(index, expand);
                 this.$watch('open', value => {
                     if (!value) {
                         setTimeout(() => {
-                            this.$wire.closeModal(index);
+                            this.$wire.closeModal(this.index);
                         }, 300);
                     }
                 });
@@ -96,9 +95,9 @@
                 this.$watch('expanded', value => {
                     if (value) {
                         setTimeout(() => {
-                            this.$wire.closeModal(index);
-                            if(expand) {
-                                this.window.location.href = href;
+                            this.$wire.closeModal(this.index);
+                            if(this.expand) {
+                                window.location.href = this.href;
                             }
                         }, 300);
                     }
