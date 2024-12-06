@@ -8,7 +8,7 @@
     'autofocus' => false,
     'options' => [],
 ])
-<div class="flex flex-col gap-2" {{ $attributes }}>
+<div class="flex flex-col gap-2 w-full" {{ $attributes }}>
     <label for="{{ $name }}">
         {{ $label }}
         @if($required)
