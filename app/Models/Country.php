@@ -13,16 +13,16 @@ class Country extends Model
 
     protected $fillable = [
         'code',
-        'iso3_code',
+        'flag_url',
     ];
 
-    public function tranlations(): HasMany
+    public function translations(): HasMany
     {
         return $this->hasMany(CountryTranslation::class, 'country_id', 'id');
     }
 
     public function getTranslation(string $language): ?CountryTranslation
     {
-        return $this->tranlations()->where('language', $language)->first();
+        return $this->translations()->where('language', $language)->first();
     }
 }
