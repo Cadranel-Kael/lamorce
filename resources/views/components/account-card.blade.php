@@ -1,7 +1,6 @@
 @props([
     'collection' => 'Collection',
-    'link' => '#',
-    '$isClosed' => '',
+    'isClosed' => '',
     'type' => '',
     'amount' => 0.00,
     'desc' => '',
@@ -10,7 +9,8 @@
 <div
     class="cursor-pointer p-6 bg-white rounded flex-col justify-between shadow flex shrink-0"
     title="{{ __('Open') }} {{ $collection }}"
-    {{ $attributes }}>
+    {{ $attributes }}
+>
     <div class="mb-5">
         <div class="flex justify-between">
             <div class="flex gap-2">
