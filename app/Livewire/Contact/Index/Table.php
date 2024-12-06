@@ -2,10 +2,7 @@
 
 namespace App\Livewire\Contact\Index;
 
-use App\Models\Contact;
-use App\Models\User;
-use Livewire\Attributes\Lazy;
-use Livewire\Attributes\Url;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,7 +11,6 @@ class Table extends Component
     use WithPagination, Sortable, Searchable, Deletable;
 
     public $selectedContactIds = [];
-
     public $contactIdsOnPage = [];
 
     public function deleteSelected()
@@ -31,7 +27,9 @@ class Table extends Component
 
     public function render()
     {
-        $query = auth()->user()->contacts()->join('addresses', 'contacts.address_id', '=', 'addresses.id');
+        $query = auth()->user()->contacts()->leftJoin('addresses', 'contacts.address_id', '=', 'addresses.id');
+
+        $query = $query->select('contacts.*', DB::raw("CONCAT(contacts.first_name, ' ', contacts.last_name) AS name"));
 
         $query = $this->applySearch($query);
 
