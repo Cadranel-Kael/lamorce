@@ -23,8 +23,8 @@
                 </x-table.h-cell>
                 <x-table.h-cell>Phone</x-table.h-cell>
                 <x-table.h-cell>
-                    <x-sortable column="country" :sortCol="$sortCol" :sortAsc="$sortAsc">
-                        {{ __('Country') }}
+                    <x-sortable column="regions" :sortCol="$sortCol" :sortAsc="$sortAsc">
+                        {{ __('Region') }}
                     </x-sortable>
                 </x-table.h-cell>
                 <x-table.h-cell>
@@ -44,7 +44,7 @@
                         </x-table.cell>
                         <x-table.cell>{{ $contact->email }}</x-table.cell>
                         <x-table.cell>{{ $contact->phone }}</x-table.cell>
-                        <x-table.cell>{{ $contact->address->country }}</x-table.cell>
+                        <x-table.cell>{{ $contact->address->state ?? ''  }}</x-table.cell>
                         <x-table.cell>
                             <x-contact.index.drop-down :contact="$contact"/>
                         </x-table.cell>

@@ -26,7 +26,7 @@ trait Sortable
     {
         if ($this->sortCol) {
             $column = match ($this->sortCol) {
-                'country' => 'addresses.country',
+                'region' => 'addresses.state',
                 default => 'name',
             };
         }
