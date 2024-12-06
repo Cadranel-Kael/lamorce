@@ -19,7 +19,7 @@ class AddressFactory extends Factory
             'postal_code' => $this->faker->postcode(),
             'street_name' => $this->faker->streetName(),
             'street_number' => $this->faker->buildingNumber(),
-            'floor' => $this->faker->randomElement([null, $this->faker->buildingNumber()]),
+            'floor' => $this->faker->randomElement([null, $this->faker->randomNumber(2, false)]),
             'city' => $this->faker->city(),
             'state' => $this->faker->state(),
             'created_at' => Carbon::now(),
