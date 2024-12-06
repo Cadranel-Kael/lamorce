@@ -4,24 +4,26 @@ namespace App\Livewire;
 
 use App\Models\Country;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
 class CountryPicker extends Component
 {
     public $countries;
+
+    #[Reactive]
     public $selectedCountry;
+
     public $search = '';
 
     #[Computed]
     public function countries()
     {
         $data = Country::query()
-            ->whereHas('translations', function ($query) {
-                $query->where('name', 'like', '%' . $this->search . '%');
-            })
-            ->with('translations', function ($query) {
-                $query->where('language', 'en');
-            })
+            ->join('country_translations', 'countries.id', '=', 'country_translations.country_id')
+            ->where('country_translations.language', 'en')
+            ->where('country_translations.name', 'like', '%' . $this->search . '%')
+            ->orderBy('country_translations.name')
             ->paginate(5);
 
 
@@ -30,11 +32,6 @@ class CountryPicker extends Component
             unset($country['translations']);
             return $country;
         });
-    }
-
-    public function selectCountry($country_id)
-    {
-        $this->selectedCountry = Country::where('id', $country_id)->with('translations')->first();
     }
 
     public function mount()
