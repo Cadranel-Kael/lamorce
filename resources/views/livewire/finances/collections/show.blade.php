@@ -2,7 +2,10 @@
     @slot('title')
         {{ $collection->name }}
     @endslot
-    <div class="font-bold text-5xl">{{ $collection->name }}</div>
+    <div class="mb-9">
+        <div class="font-bold text-5xl">{{ $collection->name }}</div>
+        <div>{{ $collection->type->name }}</div>
+    </div>
     <livewire:collection-overview class="mb-11" :total="$collection->amount" :desc="$collection->description"/>
     <h2 class="mb-7 font-bold text-xl">{{ __('Latest Transactions') }}</h2>
     @foreach($transactions as $transaction)

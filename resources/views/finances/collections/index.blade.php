@@ -25,7 +25,7 @@
                         title: '{{ $collection->name }}',
                         type: 'drawer',
                         'edit': {
-                            component: 'collection-edit',
+                            component: 'finances.collections.edit',
                             title: '{{ __('Edit') . ' ' . $collection->name }}',
                             data: {collection_id:{{ json_encode($collection->id) }}}
                         }

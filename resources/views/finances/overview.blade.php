@@ -8,6 +8,7 @@
                class="hover:underline">{{ __('Collections') }}</a></li>
     @endslot
     <livewire:collection-overview :collection="__('Total')" :total="$total" :collections-total="$collectionsTotal"/>
+    <livewire:chart/>
     <div class="mt-10 flex gap-10 flex-col">
         @foreach($collectionTypes as $type)
             <div class="flex flex-col gap-7">
@@ -15,7 +16,7 @@
                     <h2 class="text-4xl mr-6">{{ $type->name }}</h2>
                     <x-button-primary
                         x-data
-                        x-on:click="$dispatch('openModal', {title: '{{ __('New collection') }}',component: 'collection-create', data: {type:{{ $type->id }}}})">
+                        x-on:click="$dispatch('openModal', {title: '{{ __('New collection') }}',component: 'finances.collections.create', data: {type:{{ $type->id }}}})">
                         {{ __('New collection') }}
                     </x-button-primary>
                 </div>
