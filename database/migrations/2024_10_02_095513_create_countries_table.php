@@ -10,7 +10,6 @@ return new class extends Migration {
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->string('iso3_code');
             $table->string('flag_url');
             $table->timestamps();
             $table->softDeletes();
