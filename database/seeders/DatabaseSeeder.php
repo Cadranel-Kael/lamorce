@@ -2,21 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Console\Commands\SeedCountries;
 use App\Models\Account;
-use App\Models\Address;
 use App\Models\Collection;
 use App\Models\CollectionType;
 use App\Models\Contact;
-use App\Models\Country;
-use App\Models\CountryTranslation;
 use App\Models\Detente;
 use App\Models\Transaction;
 use App\Models\User;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Http;
 
 class DatabaseSeeder extends Seeder
 {
@@ -37,7 +32,6 @@ class DatabaseSeeder extends Seeder
             ->has(
                 Collection::factory()
                     ->count(4)
-                    ->has(Transaction::factory()->count(20))
             )
             ->create([
                 'name' => 'Base collection',
@@ -47,11 +41,24 @@ class DatabaseSeeder extends Seeder
             ->has(
                 Collection::factory()
                     ->count(6)
-                    ->has(Transaction::factory()->count(20))
             )
             ->create([
                 'name' => 'Project collection',
             ]);
+
+        $allCollections = Collection::all();
+
+        foreach ($allCollections as $collection) {
+            Transaction::factory(10)->create([
+                'incoming_collection_id' => $collection->id,
+                'outgoing_collection_id' => rand(0, 1) ? $allCollections->where('id', '!=', $collection->id)->random()->id : null,
+            ]);
+
+            Transaction::factory(10)->create([
+                'outgoing_collection_id' => $collection->id,
+                'incoming_collection_id' => rand(0, 1) ? $allCollections->where('id', '!=', $collection->id)->random()->id : null,
+            ]);
+        }
 
 
         Detente::factory(10)->create();

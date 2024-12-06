@@ -13,7 +13,5 @@
             {{ __('Create Contact') }}
         </x-button>
     </x-slot>
-
-
     <livewire:contact.index.table lazy/>
 </x-app-layout>

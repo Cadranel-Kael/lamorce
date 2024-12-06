@@ -12,7 +12,7 @@
         <div class="rounded bg-white mb-4 last:mb-0">
             <div class="flex items-center justify-between">
                 <h3 class="font-bold text-xl">{{ $transaction->name }}</h3>
-                <div class="text-2xl">{{ format_currency($transaction->amount) }} €</div>
+                <div class="text-2xl">{{ $transaction->incoming_collection_id === $collection->id ? '-' : '+'}} {{ format_currency($transaction->amount) }} €</div>
             </div>
             <div class="flex justify-between items-center">
                 <div>{{ $transaction->date_time->format('d/m – H:i a') }}</div>

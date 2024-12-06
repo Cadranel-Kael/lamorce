@@ -15,12 +15,12 @@ class TransactionFactory extends Factory
     {
         return [
             'name' => $this->faker->words(2, true),
-            'amount' => $this->faker->randomNumber(4),
-            'date_time' => $this->faker->dateTime(),
+            'amount' => $this->faker->numberBetween(100, 50000),
+            'date_time' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'incoming_collection_id' => Collection::factory(),
+            'outgoing_collection_id' => Collection::factory(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-
-            'collection_id' => Collection::factory(),
         ];
     }
 }

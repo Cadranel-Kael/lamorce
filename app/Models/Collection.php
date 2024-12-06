@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Collection extends Model
@@ -18,12 +20,21 @@ class Collection extends Model
         'isClosed',
     ];
 
-    public function transactions()
+    protected $casts = [
+        'isClosed' => 'boolean',
+    ];
+
+    public function incomingTransactions(): HasMany
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(Transaction::class, 'incoming_collection_id');
     }
 
-    public function type()
+    public function outgoingTransactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class, 'outgoing_collection_id');
+    }
+
+    public function type(): BelongsTo
     {
         return $this->belongsTo(CollectionType::class, 'type_id');
     }
@@ -33,10 +44,10 @@ class Collection extends Model
         return number_format(($this->amount*0.01), 2, '.', ' ');
     }
 
-    protected function casts()
+    public function calculateBalance()
     {
-        return [
-            'isClosed' => 'boolean',
-        ];
+        $incomingSum = $this->incomingTransactions()->sum('amount');
+        $outgoingSum = $this->outgoingTransactions()->sum('amount');
+        return $incomingSum - $outgoingSum;
     }
 }

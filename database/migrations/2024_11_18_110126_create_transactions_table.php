@@ -12,7 +12,8 @@ return new class extends Migration {
             $table->string('name');
             $table->dateTime('date_time');
             $table->integer('amount');
-            $table->foreignId('collection_id')->constrained('collections');
+            $table->foreignId('incoming_collection_id')->nullable()->constrained('collections');
+            $table->foreignId('outgoing_collection_id')->nullable()->constrained('collections');
             $table->timestamps();
             $table->softDeletes();
         });
