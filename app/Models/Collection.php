@@ -40,10 +40,10 @@ class Collection extends Model
 
     public function formatedAmount()
     {
-        return number_format(($this->calculateAmount()*0.01), 2, '.', ' ');
+        return number_format(($this->amount()*0.01), 2, '.', ' ');
     }
 
-    public function calculateAmount(): int
+    public function amount(): int
     {
         $incomingSum = $this->incomingTransactions()->sum('amount');
         $outgoingSum = $this->outgoingTransactions()->sum('amount');
