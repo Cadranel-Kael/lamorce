@@ -15,7 +15,6 @@ class CollectionFactory extends Factory
     {
         return [
             'name' => $this->faker->words(3, true),
-            'amount' => $this->faker->randomNumber(5, false),
             'description' => $this->faker->text(),
             'isClosed' => $this->faker->boolean(),
             'created_at' => Carbon::now(),
