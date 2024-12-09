@@ -15,6 +15,7 @@ class CountryTranslation extends Model
         'country_id',
         'language',
         'name',
+        'flag_alt'
     ];
 
     public function country(): BelongsTo
