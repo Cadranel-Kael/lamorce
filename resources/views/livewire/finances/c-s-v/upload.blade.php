@@ -61,8 +61,8 @@
                         </x-table.cell>
                         <x-table.cell>
                             @if($dateTimeCol)
-                                @for($i = 1; $i <= 3; $i++)
-                                    {{ $records[$i][$dateTimeCol] }};
+                                @for($i = 0; $i < 3; $i++)
+                                        {{ $records[$i][$dateTimeCol] }};
                                 @endfor
                             @endif
                         </x-table.cell>
@@ -84,7 +84,7 @@
                         </x-table.cell>
                         <x-table.cell>
                             @if($amountCol)
-                                @for($i = 1; $i <= 3; $i++)
+                                @for($i = 0; $i < 3; $i++)
                                     {{ $records[$i][$amountCol] }};
                                 @endfor
                             @endif
@@ -93,7 +93,6 @@
                     <x-table.row>
                         <x-table.cell>
                             {{ __('Bank account') }}
-                            <span class="text-red-600">*</span>
                         </x-table.cell>
                         <x-table.cell>
                             <x-input id="accountCol" wire:model.live="accountCol">
@@ -107,8 +106,30 @@
                         </x-table.cell>
                         <x-table.cell>
                             @if($accountCol)
-                                @for($i = 1; $i <= 3; $i++)
+                                @for($i = 0; $i < 3; $i++)
                                     {{ $records[$i][$accountCol] }};
+                                @endfor
+                            @endif
+                        </x-table.cell>
+                    </x-table.row>
+                    <x-table.row>
+                        <x-table.cell>
+                            {{ __('Message') }}
+                        </x-table.cell>
+                        <x-table.cell>
+                            <x-input id="messageCol" wire:model.live="messageCol">
+                                <x-input.select>
+                                    <option value="">{{ __('Select') }}</option>
+                                    @foreach($headers as $header)
+                                        <option value="{{ $header }}">{{ $header }}</option>
+                                    @endforeach
+                                </x-input.select>
+                            </x-input>
+                        </x-table.cell>
+                        <x-table.cell>
+                            @if($messageCol)
+                                @for($i = 0; $i < 3; $i++)
+                                    {{ $records[$i][$messageCol] }};
                                 @endfor
                             @endif
                         </x-table.cell>

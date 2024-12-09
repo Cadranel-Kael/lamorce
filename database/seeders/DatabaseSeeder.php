@@ -48,17 +48,17 @@ class DatabaseSeeder extends Seeder
 
         $allCollections = Collection::all();
 
-        foreach ($allCollections as $collection) {
-            Transaction::factory(10)->create([
-                'incoming_collection_id' => $collection->id,
-                'outgoing_collection_id' => rand(0, 1) ? $allCollections->where('id', '!=', $collection->id)->random()->id : null,
-            ]);
-
-            Transaction::factory(10)->create([
-                'outgoing_collection_id' => $collection->id,
-                'incoming_collection_id' => rand(0, 1) ? $allCollections->where('id', '!=', $collection->id)->random()->id : null,
-            ]);
-        }
+//        foreach ($allCollections as $collection) {
+//            Transaction::factory(10)->create([
+//                'incoming_collection_id' => $collection->id,
+//                'outgoing_collection_id' => rand(0, 1) ? $allCollections->where('id', '!=', $collection->id)->random()->id : null,
+//            ]);
+//
+//            Transaction::factory(10)->create([
+//                'outgoing_collection_id' => $collection->id,
+//                'incoming_collection_id' => rand(0, 1) ? $allCollections->where('id', '!=', $collection->id)->random()->id : null,
+//            ]);
+//        }
 
 
         Detente::factory(10)->create();

@@ -15,20 +15,15 @@ class Show extends Component
     public $collection;
     public $transactions;
 
-    public function click()
-    {
-        Debugbar::error('Clicked');
-    }
-
     public function mount($collection)
     {
         $this->collection = Collection::findOrFail($collection);
         $this->transactions =
             Transaction::
             where('incoming_collection_id', $this->collection->id)
-            ->orWhere('outgoing_collection_id', $this->collection->id)
-            ->orderBy('date_time', 'desc')
-            ->get();
+                ->orWhere('outgoing_collection_id', $this->collection->id)
+                ->orderBy('date_time', 'desc')
+                ->get();
     }
 
     public function render()

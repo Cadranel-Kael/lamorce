@@ -12,17 +12,17 @@
                     {{ __('New transfer') }}
                 </x-button>
             </div>
-            <div class="text-5xl">{{ format_currency($total) }} €</div>
+            <div class="text-5xl">{{ $total }} €</div>
         </div>
         @if($collectionsTotal)
             <div class="flex justify-between">
                 <div>
                     <h3 class="text-lg font-bold mb-4">{{ __('Base collection') }}</h3>
-                    <div class="text-4xl">{{ format_currency($total - $collectionsTotal) }} €</div>
+                    <div class="text-4xl">{{ $total - $collectionsTotal }} €</div>
                 </div>
                 <div>
                     <h3 class="text-lg font-bold mb-4">{{ __('Amount divided in collections') }}</h3>
-                    <div class="text-4xl">{{ format_currency($collectionsTotal) }} €</div>
+                    <div class="text-4xl">{{ $collectionsTotal }} €</div>
                 </div>
             </div>
         @endif

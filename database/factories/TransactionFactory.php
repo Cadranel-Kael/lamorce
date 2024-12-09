@@ -14,11 +14,12 @@ class TransactionFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->words(2, true),
             'amount' => $this->faker->numberBetween(100, 50000),
             'date_time' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'incoming_collection_id' => Collection::factory(),
             'outgoing_collection_id' => Collection::factory(),
+            'identifier' => $this->faker->uuid,
+            'message' => $this->faker->sentence,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

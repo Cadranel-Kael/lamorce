@@ -47,6 +47,6 @@ class Collection extends Model
     {
         $incomingSum = $this->incomingTransactions()->sum('amount');
         $outgoingSum = $this->outgoingTransactions()->sum('amount');
-        return $incomingSum - $outgoingSum;
+        return - $incomingSum + $outgoingSum;
     }
 }

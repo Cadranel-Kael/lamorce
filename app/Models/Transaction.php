@@ -12,17 +12,35 @@ class Transaction extends Model
     use SoftDeletes, HasFactory;
 
     protected $fillable = [
-        'name',
         'date_time',
         'amount',
         'outgoing_collection_id',
         'incoming_collection_id',
         'identifier',
+        'message',
+        'is_imported',
     ];
 
     protected $casts = [
         'date_time' => 'datetime',
     ];
+
+    public function name()
+    {
+        $name = '';
+
+        if ($this->incomingCollection) {
+            $name = 'Expense';
+        } elseif ($this->outgoingCollection) {
+            $name = 'Donation';
+        }
+
+        if ($this->is_imported) {
+            $name .= ' (Imported)';
+        }
+
+        return $name;
+    }
 
     public function incomingCollection(): BelongsTo
     {

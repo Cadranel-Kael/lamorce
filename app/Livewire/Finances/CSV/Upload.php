@@ -21,10 +21,10 @@ class Upload extends Component
     public $headers;
     public $records = [];
 
-    public $nameCol;
     public $dateTimeCol;
     public $amountCol;
     public $accountCol;
+    public $messageCol;
 
     public $count = 0;
 
@@ -50,9 +50,9 @@ class Upload extends Component
             $record['identifier'] = hash('sha256', implode('', $record));
         }
 
-        $this->records = array_filter($this->records, function ($record) {
+        $this->records = array_values(array_filter($this->records, function ($record) {
             return !Transaction::where('identifier', $record['identifier'])->exists();
-        });
+        }));
 
         if (empty($this->records)) {
             $this->addError('file', 'All records have already been imported.');
@@ -77,13 +77,11 @@ class Upload extends Component
     public function import()
     {
         foreach ($this->records as $record) {
-            $name = 'Import via CSV';
             $date_time = Carbon::parse($record[$this->dateTimeCol]);
-            $amount = abs(floor(floatval($record[$this->amountCol]) * 100));
+            $amount = abs(floatval(str_replace(',','.',str_replace('.','',$record[$this->amountCol]))* 100));
             if (floatval($record[$this->amountCol]) > 0) {
                 $incoming_collection_id = Collection::first()->id;
                 $outgoing_collection_id = null;
-                $name = 'Donation (via CSV)';
                 if (!empty($record[$this->accountCol])) {
                     $contact = Contact::query()
                         ->where('bank_account', $record[$this->accountCol])
@@ -98,15 +96,15 @@ class Upload extends Component
             }
 
             Transaction::create([
-                'name' => $name,
                 'date_time' => $date_time,
                 'amount' => $amount,
-                'outgoing_collection_id' => $outgoing_collection_id,
-                'incoming_collection_id' => $incoming_collection_id,
+                'outgoing_collection_id' => $incoming_collection_id,
+                'incoming_collection_id' => $outgoing_collection_id,
                 'identifier' => $record['identifier'],
+                'message' => $record[$this->messageCol] ?? null,
+                'is_imported' => true,
             ]);
             $this->count++;
-            sleep(1);
         }
 
         $this->reset();
