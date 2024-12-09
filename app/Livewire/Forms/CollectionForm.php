@@ -27,7 +27,7 @@ class CollectionForm extends Form
     {
         $this->validate();
 
-        Collection::create([
+        auth()->user()->collections()->create([
             'name' => $this->name,
             'type_id' => $this->type,
             'amount' => $this->amount ?: 0,

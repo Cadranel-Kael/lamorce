@@ -10,16 +10,10 @@ use Illuminate\Http\Request;
 
 class CollectionController extends Controller
 {
-    use HasDialog;
-
-    public function click()
-    {
-        Debugbar::info('Click');
-    }
 
     public function index()
     {
-        $collections = Collection::all();
+        $collections = auth()->user()->collections()->with('type')->get();
 
         return view('finances.collections.index', compact('collections'));
     }
@@ -40,15 +34,6 @@ class CollectionController extends Controller
     public function show(string $collection)
     {
         return view('finances.collections.show', compact('collection'));
-//        $collection = Collection::find($collection)->first();
-//        $transactions = Transaction::firstWhere('collection_id', '=', $collection->id)->limit(3)->get();
-//        $collections = Collection::all();
-//
-//        return view('finances.collections.show', [
-//            'collection' => $collection,
-//            'transactions' => $transactions,
-//            'collections' => $collections,
-//            ]);
     }
 
     public function update(Request $request, Collection $collection)

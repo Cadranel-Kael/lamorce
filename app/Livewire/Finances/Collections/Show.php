@@ -17,7 +17,10 @@ class Show extends Component
 
     public function mount($collection)
     {
-        $this->collection = Collection::findOrFail($collection);
+        if (!auth()->user()->collections()->where('id', $collection)->exists()) {
+            abort(403);
+        }
+        $this->collection = auth()->user()->collections()->findOrFail($collection);
         $this->transactions =
             Transaction::
             where('incoming_collection_id', $this->collection->id)

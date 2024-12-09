@@ -11,10 +11,10 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->foreignId('type_id')->constrained('collection_types');
-            $table->integer('amount');
             $table->string('description')->nullable();
             $table->boolean('isClosed');
-            $table->integer('order')->default(0);
+            $table->integer('is_general')->default(0);
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });

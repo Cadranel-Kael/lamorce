@@ -1,4 +1,4 @@
-<div class="bg-white rounded p-9 shadow {{ $class }}">
+<div {{ $attributes->class('bg-white rounded p-9 shadow') }}>
     <div class="gap-9 flex flex-col">
         <div>
             <div class="flex gap-4 mb-6">
@@ -25,9 +25,9 @@
                     <div class="text-4xl">{{ format_currency($total - $baseTotal) }} €</div>
                 </div>
             </div>
-        @endif
-        @if($desc)
+        @endisset
+        @isset($desc)
             <p class="max-w-lg">{{ $desc }}</p>
-        @endif
+        @endisset
     </div>
 </div>

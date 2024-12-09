@@ -2,6 +2,13 @@
     @slot('title')
         {{ __('Finances') }}
     @endslot
+    @slot('actions')
+        <x-button
+            x-data
+            @click="$dispatch('openModal', {component: 'finances.collections.create', title: '{{ __('Create Collection') }}'})">
+            {{ __('Create Collection') }}
+        </x-button>
+    @endslot
     @slot('subMenu')
         <li><a href="{{ route('finances.overview') }}" class="hover:underline">{{ __('Overview') }}</a></li>
         <li><a href="{{ route('finances.collections.index') }}"
@@ -14,7 +21,7 @@
                 :showStatus="true"
                 is-closed="{{ $collection->isClosed }}"
                 type="{{ $collection->type->name }}"
-                amount="{{ $collection->amount }}"
+                amount="{{ $collection->amount() }}"
                 desc="{{ $collection->description }}"
                 x-data
                 x-on:click="$dispatch(

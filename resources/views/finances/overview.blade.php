@@ -7,7 +7,11 @@
         <li><a href="{{ route('finances.collections.index') }}"
                class="hover:underline">{{ __('Collections') }}</a></li>
     @endslot
-    <livewire:collection-overview :collection="__('Total')" :total="$total" :collections-total="$collectionsTotal"/>
+    <x-collection-overview
+        :collection="__('Total')"
+        :total="$total"
+        :baseTotal="$baseCollection->amount()"
+    />
     <livewire:chart/>
     <div class="mt-10 flex gap-10 flex-col">
         @foreach($collectionTypes as $type)
@@ -25,7 +29,7 @@
                         <x-account-card
                             key="accounts"
                             :collection="$collection->name"
-                            :amount="$collection->amount"
+                            :amount="$collection->amount()"
                             x-on:click="$dispatch(
                             'openModal', {
                                 component: 'finances.collections.show',

@@ -80,7 +80,7 @@ class Upload extends Component
             $date_time = Carbon::parse($record[$this->dateTimeCol]);
             $amount = abs(floatval(str_replace(',','.',str_replace('.','',$record[$this->amountCol]))* 100));
             if (floatval($record[$this->amountCol]) > 0) {
-                $incoming_collection_id = Collection::first()->id;
+                $incoming_collection_id = auth()->user()->collections->where('is_general', 1)->first()->id;
                 $outgoing_collection_id = null;
                 if (!empty($record[$this->accountCol])) {
                     $contact = Contact::query()

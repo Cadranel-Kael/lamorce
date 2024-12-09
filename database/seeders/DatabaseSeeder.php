@@ -23,23 +23,31 @@ class DatabaseSeeder extends Seeder
     {
         Artisan::call('seed:countries');
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
 
-        CollectionType::factory()
-            ->has(
-                Collection::factory()
-                    ->count(4)
-            )
+        $baseCollections = CollectionType::factory()
             ->create([
                 'name' => 'Base collection',
+            ]);
+
+        Collection::factory()
+            ->create([
+                'is_general' => 1,
+                'name' => 'General collection',
+                'type_id' => $baseCollections->id,
+                'isClosed' => 0,
+                'user_id' => $user->id,
             ]);
 
         CollectionType::factory()
             ->has(
                 Collection::factory()
+                    ->state([
+                        'user_id' => $user->id,
+                    ])
                     ->count(6)
             )
             ->create([

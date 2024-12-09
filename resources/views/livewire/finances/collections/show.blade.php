@@ -6,7 +6,7 @@
         <div class="font-bold text-5xl">{{ $collection->name }}</div>
         <div>{{ $collection->type->name }}</div>
     </div>
-    <livewire:collection-overview class="mb-11" :total="$collection->formatedAmount()" :desc="$collection->description"/>
+    <livewire:collection-overview class="mb-11" :total="$collection->amount()" :desc="$collection->description"/>
     <h2 class="mb-7 font-bold text-xl">{{ __('Latest Transactions') }}</h2>
     @foreach($transactions as $transaction)
         <div class="rounded bg-white mb-4 last:mb-0 shadow p-4 justify-center">
