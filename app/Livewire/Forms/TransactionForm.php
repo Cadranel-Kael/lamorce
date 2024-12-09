@@ -8,19 +8,16 @@ use Livewire\Form;
 
 class TransactionForm extends Form
 {
-    #[Validate(['required'])]
-    public $name = '';
-
     #[Validate(['required', 'date'])]
     public $date_time = '';
 
     #[Validate(['required', 'integer'])]
     public $amount = '';
 
-    #[Validate(['integer', 'nullable'])]
+    #[Validate(['required', 'integer', 'different:incoming_collection_id'], as: 'outgoing collection')]
     public $outgoing_collection_id = '';
 
-    #[Validate(['integer', 'nullable'])]
+    #[Validate(['required', 'integer', 'different:outgoing_collection_id'], as: 'incoming collection')]
     public $incoming_collection_id = '';
 
     public function store()
@@ -28,12 +25,12 @@ class TransactionForm extends Form
         $this->validate();
 
         Transaction::create([
-            'name' => $this->name,
             'date_time' => $this->date_time,
             'amount' => $this->amount*100,
             'incoming_collection_id' => $this->incoming_collection_id,
             'outgoing_collection_id' => $this->outgoing_collection_id,
         ]);
+
 
         $this->reset();
     }
