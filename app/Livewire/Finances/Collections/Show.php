@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Finances\Collections;
 
-use App\Concerns\HasDrawer;
+use App\Concerns\HasDialog;
 use App\Models\Collection;
 use App\Models\Transaction;
 use Barryvdh\Debugbar\Facades\Debugbar;
@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class Show extends Component
 {
-    use HasDrawer;
+    use HasDialog;
 
     public $collection;
     public $transactions;
