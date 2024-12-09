@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('bank_account')->nullable();
             $table->foreignId('address_id')->nullable()->constrained('addresses')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->json('months_donated')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
