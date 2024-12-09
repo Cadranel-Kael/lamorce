@@ -3,7 +3,9 @@
         <div>
             <div class="flex gap-4 mb-6">
                 <h2 class="flex-grow text-xl font-bold">{{ __('Total') }}</h2>
-                <x-button-black>{{ __('Import from file') }}</x-button-black>
+                <x-button-black
+                    wire:click.prevent="$dispatch('openModal', {component: 'finances.c-s-v.upload', type: 'modal', title: '{{ __('Upload a file') }}'})"
+                >{{ __('Import from file') }}</x-button-black>
                 <x-button
                     wire:click.prevent="$dispatch('openModal', {component: 'finances.transactions.create', title: '{{ __('New transfer') }}'})"
                 >
