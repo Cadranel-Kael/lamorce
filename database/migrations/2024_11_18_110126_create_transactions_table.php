@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->integer('amount');
             $table->foreignId('incoming_collection_id')->nullable()->constrained('collections');
             $table->foreignId('outgoing_collection_id')->nullable()->constrained('collections');
+            $table->string('identifier')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

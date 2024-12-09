@@ -10,38 +10,46 @@ use Livewire\Component;
 class Create extends Component
 {
     public TransactionForm $form;
-    public TransactionForm $fromForm;
-    public TransactionForm $toForm;
-    public $from;
-    public $to;
-    public $fromCollections;
-    public $toCollections;
     public $collections;
+    public $type = 'internal';
 
     public function mount()
     {
         $this->collections = Collection::get();
     }
 
-    public function fromUpdated()
+    public function updateType($value)
     {
-
+        $this->type = $value;
     }
 
     public function switchCollections(): void
     {
-        list($this->from, $this->to) = [$this->to, $this->from];
+        list($this->form->outgoing_collection_id, $this->form->incoming_collection_id) = [$this->form->incoming_collection_id, $this->form->outgoing_collection_id];
     }
 
     public function save()
     {
         $this->form->date_time = now();
-        $this->form->validate();
-        $this->fromForm = $this->form;
-        $this->fromForm->amount = -$this->fromForm->amount;
-        $this->fromForm->store();
-        $this->toForm = $this->form;
-        $this->toForm->store();
+        $this->form->store();
+    }
+
+    #[Computed]
+    public function incomingCollection()
+    {
+        if (!$this->form->incoming_collection_id) {
+            return null;
+        }
+        return Collection::findOrFail($this->form->incoming_collection_id);
+    }
+
+    #[Computed]
+    public function outgoingCollection()
+    {
+        if (!$this->form->outgoing_collection_id) {
+            return null;
+        }
+        return Collection::findOrFail($this->form->outgoing_collection_id);
     }
 
     public function render()

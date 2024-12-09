@@ -17,8 +17,11 @@ class TransactionForm extends Form
     #[Validate(['required', 'integer'])]
     public $amount = '';
 
-    #[Validate(['integer'])]
-    public $collection_id = '';
+    #[Validate(['integer', 'nullable'])]
+    public $outgoing_collection_id = '';
+
+    #[Validate(['integer', 'nullable'])]
+    public $incoming_collection_id = '';
 
     public function store()
     {
@@ -27,8 +30,9 @@ class TransactionForm extends Form
         Transaction::create([
             'name' => $this->name,
             'date_time' => $this->date_time,
-            'amount' => $this->amount,
-            'collection_id' => $this->collection_id,
+            'amount' => $this->amount*100,
+            'incoming_collection_id' => $this->incoming_collection_id,
+            'outgoing_collection_id' => $this->outgoing_collection_id,
         ]);
 
         $this->reset();

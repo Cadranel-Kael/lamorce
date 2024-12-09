@@ -17,6 +17,7 @@ class Transaction extends Model
         'amount',
         'outgoing_collection_id',
         'incoming_collection_id',
+        'identifier',
     ];
 
     protected $casts = [
