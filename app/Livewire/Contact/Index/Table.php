@@ -2,20 +2,26 @@
 
 namespace App\Livewire\Contact\Index;
 
+use App\Concerns\TableMassAction;
+use App\Concerns\TableSearchable;
+use App\Concerns\TableSortable;
+use App\Models\Contact;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Table extends Component
 {
-    use WithPagination, Sortable, Searchable, Deletable;
+    use WithPagination, TableSortable, TableSearchable, Deletable, TableMassAction;
 
-    public $selectedContactIds = [];
-    public $contactIdsOnPage = [];
+    protected $sortableColumns = [
+        'name' => 'name',
+        'region' => 'addresses.state',
+    ];
 
     public function deleteSelected()
     {
-        foreach ($this->selectedContactIds as $contactId) {
+        foreach ($this->selectedItems as $contactId) {
             $this->deleteContact($contactId);
         }
     }
@@ -27,9 +33,9 @@ class Table extends Component
 
     public function render()
     {
-        $query = auth()->user()->contacts()->leftJoin('addresses', 'contacts.address_id', '=', 'addresses.id');
+        $query = Contact::leftJoin('addresses', 'contacts.address_id', '=', 'addresses.id');
 
-        $query = $query->select('contacts.*', DB::raw("CONCAT(contacts.first_name, ' ', contacts.last_name) AS name"));
+        $query = $query->select('contacts.*');
 
         $query = $this->applySearch($query);
 
@@ -37,7 +43,7 @@ class Table extends Component
 
         $contacts = $query->paginate(10);
 
-        $this->contactIdsOnPage = $contacts->map(fn ($contact) => (string) $contact->id)->toArray();
+        $this->itemsOnPage = $contacts->map(fn($contact) => (string)$contact->id)->toArray();
 
         return view('livewire.contact.index.table', [
             'contacts' => $contacts,

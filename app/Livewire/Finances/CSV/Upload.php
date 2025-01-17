@@ -20,11 +20,17 @@ class Upload extends Component
     public $file;
     public $headers;
     public $records = [];
-
     public $dateTimeCol;
     public $amountCol;
     public $accountCol;
     public $messageCol;
+    public $nameCol;
+
+    public $defaultDateTimeCol = 'Date';
+    public $defaultAmountCol = 'Amount';
+    public $defaultAccountCol = 'Incoming';
+    public $defaultMessageCol = 'Message';
+    public $defaultNameCol = 'Contact';
 
     public $count = 0;
 
@@ -79,16 +85,23 @@ class Upload extends Component
         foreach ($this->records as $record) {
             $date_time = Carbon::parse($record[$this->dateTimeCol]);
             $amount = abs(floatval(str_replace(',','.',str_replace('.','',$record[$this->amountCol]))* 100));
+            $contact = null;
+            if (!empty($record[$this->accountCol])) {
+                $contact = Contact::query()
+                    ->where('bank_account', $record[$this->accountCol])
+                    ->first();
+                if (!$contact) {
+                    $contact = Contact::create([
+                        'name' => ucwords(strtolower($record[$this->nameCol])),
+                        'bank_account' => $record[$this->accountCol],
+                    ]);
+                }
+            }
             if (floatval($record[$this->amountCol]) > 0) {
-                $incoming_collection_id = auth()->user()->collections->where('is_general', 1)->first()->id;
+                $incoming_collection_id = Collection::where('is_general', 1)->first()->id;
                 $outgoing_collection_id = null;
-                if (!empty($record[$this->accountCol])) {
-                    $contact = Contact::query()
-                        ->where('bank_account', $record[$this->accountCol])
-                        ->first();
-                    if ($contact) {
-                        $this->updateMonthsDonated($contact, $date_time);
-                    }
+                if ($contact) {
+                    $this->updateMonthsDonated($contact, $date_time);
                 }
             } else {
                 $outgoing_collection_id = Collection::first()->id;
@@ -104,6 +117,7 @@ class Upload extends Component
                 'message' => $record[$this->messageCol] ?? null,
                 'is_imported' => true,
             ]);
+
             $this->count++;
         }
 

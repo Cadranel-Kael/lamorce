@@ -13,7 +13,7 @@ class CollectionController extends Controller
 
     public function index()
     {
-        $collections = auth()->user()->collections()->with('type')->get();
+        $collections = Collection::with('type')->get();
 
         return view('finances.collections.index', compact('collections'));
     }
