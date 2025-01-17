@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->string('description')->nullable();
             $table->boolean('isClosed');
             $table->integer('is_general')->default(0);
-            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });
