@@ -37,7 +37,7 @@
                 @foreach($contacts as $contact)
                     <x-table.row wire:key="{{ $contact->id }}">
                         <x-table.cell>
-                            <input wire:model="selectedContactIds" value="{{ $contact->id }}" class="rounded" type="checkbox">
+                            <input wire:model="selectedItems" value="{{ $contact->id }}" class="rounded" type="checkbox">
                         </x-table.cell>
                         <x-table.cell>
                             {{ $contact->name }}

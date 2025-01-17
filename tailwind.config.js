@@ -39,6 +39,21 @@ export default {
                 11: '5.9375rem',
                 12: '7.4375rem',
             },
+            height: {
+                'screen-1/2': '50vh',
+                'screen-1/4': '25vh',
+                'screen-3/4': '75vh',
+            },
+            minHeight: {
+                'screen-1/2': '50vh',
+                'screen-1/4': '25vh',
+                'screen-3/4': '75vh',
+            },
+            maxHeight: {
+              'screen-1/2': '50vh',
+              'screen-1/4': '25vh',
+              'screen-3/4': '75vh',
+            },
             fontSize: {
                 xs: ['0.625rem', { lineHeight: '1.5' }],
                 sm: ['0.8125rem', { lineHeight: '1.5' }],

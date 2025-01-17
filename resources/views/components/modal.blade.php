@@ -33,7 +33,7 @@
                     </svg>
                 </button>
             </div>
-            <div class="px-8 py-4">
+            <div class="px-8 py-4 max-h-screen-3/4 overflow-auto">
                 @livewire($component, $data, key($component))
             </div>
         </div>

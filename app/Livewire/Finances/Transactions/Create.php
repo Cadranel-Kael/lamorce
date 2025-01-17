@@ -4,6 +4,7 @@ namespace App\Livewire\Finances\Transactions;
 
 use App\Livewire\Forms\TransactionForm;
 use App\Models\Collection;
+use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -15,7 +16,7 @@ class Create extends Component
 
     public function mount()
     {
-        $this->collections = Collection::get();
+        $this->collections = auth()->user()->collections->where('isClosed', false);
     }
 
     public function updateType($value)
@@ -30,6 +31,10 @@ class Create extends Component
 
     public function save()
     {
+        if ($this->incomingCollection()->amount() < $this->form->amount) {
+            $this->addError('form.amount', 'Not enough funds in' . $this->incomingCollection()->name);
+            return;
+        }
         $this->form->date_time = now();
         $this->form->store();
     }

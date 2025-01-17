@@ -18,4 +18,5 @@
         data-1p-ignore
     @endif
     id="{{ $id }}"
+    value="{{ $slot }}"
 >

@@ -3,6 +3,7 @@
 namespace App\Livewire\Finances\Collections;
 
 use App\Concerns\HasDialog;
+use App\Enum\Month;
 use App\Models\Collection;
 use App\Models\Transaction;
 use Barryvdh\Debugbar\Facades\Debugbar;
@@ -14,13 +15,18 @@ class Show extends Component
 
     public $collection;
     public $transactions;
+    public $graphLabels;
+    public $graphValues;
 
     public function mount($collection)
     {
-        if (!auth()->user()->collections()->where('id', $collection)->exists()) {
-            abort(403);
+        $this->collection = Collection::findOrFail($collection);
+        $this->collection->monthlyAmount();
+        if ($this->collection->monthlyAmount()) {
+            $this->graphLabels = $this->collection->monthlyAmount()->pluck('month')->map(fn($val) => Month::fromNumber($val)->short())->toArray();
+            $this->graphValues = $this->collection->monthlyAmount()->pluck('total')->map(fn($val) => $val / 100)->toArray();
         }
-        $this->collection = auth()->user()->collections()->findOrFail($collection);
+
         $this->transactions =
             Transaction::
             where('incoming_collection_id', $this->collection->id)

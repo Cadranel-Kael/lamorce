@@ -24,6 +24,9 @@
             <h2 class="sr-only">{{ __('Side navigation') }}</h2>
             <ul class="flex-col flex gap-4">
                 <li class="text-xl font-bold mb-10"><a href="/">l'amorce</a></li>
+                <x-link-nav route="dashboard">
+                    {{ __('Dashboard') }}
+                </x-link-nav>
                 <x-link-nav name="finances" route="finances.overview">
                     Finances
                     @slot('linkNav')
@@ -36,11 +39,26 @@
                         <li class="hover:font-bold"><a href="" wire:navigate>New collection</a></li>
                     @endslot
                 </x-link-nav>
-                <x-link-nav route="detentes.overview">
-                    Détentes
+                <x-link-nav route="mandates.overview">
+                    {{ __('Mandates') }}
+                </x-link-nav>
+                <x-link-nav route="dashboard">
+                    {{ __('Newsletter') }}
                 </x-link-nav>
                 <x-link-nav route="contacts.index">
                     Contacts
+                </x-link-nav>
+                <x-link-nav route="projects.index">
+                    {{ __('Projects') }}
+                </x-link-nav>
+                <x-link-nav route="dashboard">
+                    {{ __('Calendar') }}
+                </x-link-nav>
+                <x-link-nav route="dashboard">
+                    {{ __('Users') }}
+                </x-link-nav>
+                <x-link-nav route="dashboard">
+                    {{ __('Account') }}
                 </x-link-nav>
             </ul>
         </nav>

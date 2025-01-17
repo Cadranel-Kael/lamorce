@@ -37,105 +37,130 @@
             <div class="text-gray-500 mb-2">
                 {{ __('Match your file columns to the fields in our system.')}}
             </div>
-            <x-table>
-                <x-table.head>
-                    <x-table.h-cell>{{ __('Transaction Fields') }}</x-table.h-cell>
-                    <x-table.h-cell>{{ __('Your file\'s columns') }}</x-table.h-cell>
-                    <x-table.h-cell class="w-full">{{ __('Your file\'s data') }}</x-table.h-cell>
-                </x-table.head>
-                <x-table.body>
-                    <x-table.row>
-                        <x-table.cell>
-                            {{ __('Date') }}
-                            <span class="text-red-600">*</span>
-                        </x-table.cell>
-                        <x-table.cell>
-                            <x-input id="dateTimeCol" wire:model.live="dateTimeCol">
-                                <x-input.select>
-                                    <option value="">{{ __('Select') }}</option>
-                                    @foreach($headers as $header)
-                                        <option value="{{ $header }}">{{ $header }}</option>
-                                    @endforeach
-                                </x-input.select>
-                            </x-input>
-                        </x-table.cell>
-                        <x-table.cell>
-                            @if($dateTimeCol)
-                                @for($i = 0; $i < 3; $i++)
+            <div>
+                <x-table>
+                    <x-table.head class="sticky top-0">
+                        <x-table.h-cell class="sticky">{{ __('Transaction Fields') }}</x-table.h-cell>
+                        <x-table.h-cell class="sticky">{{ __('Your file\'s columns') }}</x-table.h-cell>
+                        <x-table.h-cell class="sticky w-full">{{ __('Your file\'s data') }}</x-table.h-cell>
+                    </x-table.head>
+                    <x-table.body>
+                        <x-table.row>
+                            <x-table.cell>
+                                {{ __('Date') }}
+                                <span class="text-red-600">*</span>
+                            </x-table.cell>
+                            <x-table.cell>
+                                <x-input id="dateTimeCol" wire:model.live="dateTimeCol">
+                                    <x-input.select>
+                                        <option value="">{{ __('Select') }}</option>
+                                        @foreach($headers as $header)
+                                            <option value="{{ $header }}" @if($header === $defaultDateTimeCol) selected @endif>{{ $header }}</option>
+                                        @endforeach
+                                    </x-input.select>
+                                </x-input>
+                            </x-table.cell>
+                            <x-table.cell>
+                                @if($dateTimeCol)
+                                    @for($i = 0; $i < 3; $i++)
                                         {{ $records[$i][$dateTimeCol] }};
-                                @endfor
-                            @endif
-                        </x-table.cell>
-                    </x-table.row>
-                    <x-table.row>
-                        <x-table.cell>
-                            {{ __('Amount') }}
-                            <span class="text-red-600">*</span>
-                        </x-table.cell>
-                        <x-table.cell>
-                            <x-input id="amountCol" wire:model.live="amountCol">
-                                <x-input.select>
-                                    <option value="">{{ __('Select') }}</option>
-                                    @foreach($headers as $header)
-                                        <option value="{{ $header }}">{{ $header }}</option>
-                                    @endforeach
-                                </x-input.select>
-                            </x-input>
-                        </x-table.cell>
-                        <x-table.cell>
-                            @if($amountCol)
-                                @for($i = 0; $i < 3; $i++)
-                                    {{ $records[$i][$amountCol] }};
-                                @endfor
-                            @endif
-                        </x-table.cell>
-                    </x-table.row>
-                    <x-table.row>
-                        <x-table.cell>
-                            {{ __('Bank account') }}
-                        </x-table.cell>
-                        <x-table.cell>
-                            <x-input id="accountCol" wire:model.live="accountCol">
-                                <x-input.select>
-                                    <option value="">{{ __('Select') }}</option>
-                                    @foreach($headers as $header)
-                                        <option value="{{ $header }}">{{ $header }}</option>
-                                    @endforeach
-                                </x-input.select>
-                            </x-input>
-                        </x-table.cell>
-                        <x-table.cell>
-                            @if($accountCol)
-                                @for($i = 0; $i < 3; $i++)
-                                    {{ $records[$i][$accountCol] }};
-                                @endfor
-                            @endif
-                        </x-table.cell>
-                    </x-table.row>
-                    <x-table.row>
-                        <x-table.cell>
-                            {{ __('Message') }}
-                        </x-table.cell>
-                        <x-table.cell>
-                            <x-input id="messageCol" wire:model.live="messageCol">
-                                <x-input.select>
-                                    <option value="">{{ __('Select') }}</option>
-                                    @foreach($headers as $header)
-                                        <option value="{{ $header }}">{{ $header }}</option>
-                                    @endforeach
-                                </x-input.select>
-                            </x-input>
-                        </x-table.cell>
-                        <x-table.cell>
-                            @if($messageCol)
-                                @for($i = 0; $i < 3; $i++)
-                                    {{ $records[$i][$messageCol] }};
-                                @endfor
-                            @endif
-                        </x-table.cell>
-                    </x-table.row>
-                </x-table.body>
-            </x-table>
+                                    @endfor
+                                @endif
+                            </x-table.cell>
+                        </x-table.row>
+                        <x-table.row>
+                            <x-table.cell>
+                                {{ __('Amount') }}
+                                <span class="text-red-600">*</span>
+                            </x-table.cell>
+                            <x-table.cell>
+                                <x-input id="amountCol" wire:model.live="amountCol">
+                                    <x-input.select>
+                                        <option value="">{{ __('Select') }}</option>
+                                        @foreach($headers as $header)
+                                            <option value="{{ $header }}" @if($header === $defaultAmountCol) selected @endif>{{ $header }}</option>
+                                        @endforeach
+                                    </x-input.select>
+                                </x-input>
+                            </x-table.cell>
+                            <x-table.cell>
+                                @if($amountCol)
+                                    @for($i = 0; $i < 3; $i++)
+                                        {{ $records[$i][$amountCol] }};
+                                    @endfor
+                                @endif
+                            </x-table.cell>
+                        </x-table.row>
+                        <x-table.row>
+                            <x-table.cell>
+                                {{ __('Message') }}
+                            </x-table.cell>
+                            <x-table.cell>
+                                <x-input id="messageCol" wire:model.live="messageCol">
+                                    <x-input.select>
+                                        <option value="">{{ __('Select') }}</option>
+                                        @foreach($headers as $header)
+                                            <option value="{{ $header }}" @if($header === $defaultMessageCol) selected @endif>{{ $header }}</option>
+                                        @endforeach
+                                    </x-input.select>
+                                </x-input>
+                            </x-table.cell>
+                            <x-table.cell>
+                                @if($messageCol)
+                                    @for($i = 0; $i < 3; $i++)
+                                        {{ $records[$i][$messageCol] }};
+                                    @endfor
+                                @endif
+                            </x-table.cell>
+                        </x-table.row>
+                        <x-table.row>
+                            <x-table.cell>
+                                {{ __('Name') }}
+                                <span class="text-red-600">*</span>
+                            </x-table.cell>
+                            <x-table.cell>
+                                <x-input id="nameCol" wire:model.live="nameCol">
+                                    <x-input.select>
+                                        <option value="">{{ __('Select') }}</option>
+                                        @foreach($headers as $header)
+                                            <option value="{{ $header }}" @if($header === $defaultNameCol) selected @endif>{{ $header }}</option>
+                                        @endforeach
+                                    </x-input.select>
+                                </x-input>
+                            </x-table.cell>
+                            <x-table.cell>
+                                @if($nameCol)
+                                    @for($i = 0; $i < 3; $i++)
+                                        {{ $records[$i][$nameCol] }};
+                                    @endfor
+                                @endif
+                            </x-table.cell>
+                        </x-table.row>
+                        <x-table.row>
+                            <x-table.cell>
+                                {{ __('Bank account') }}
+                            </x-table.cell>
+                            <x-table.cell>
+                                <x-input id="accountCol" wire:model.live="accountCol">
+                                    <x-input.select>
+                                        <option value="">{{ __('Select') }}</option>
+                                        @foreach($headers as $header)
+                                            <option value="{{ $header }}" @if($header === $defaultAccountCol) selected @endif>{{ $header }}</option>
+                                        @endforeach
+                                    </x-input.select>
+                                </x-input>
+                            </x-table.cell>
+                            <x-table.cell>
+                                @if($accountCol)
+                                    @for($i = 0; $i < 3; $i++)
+                                        {{ $records[$i][$accountCol] }};
+                                    @endfor
+                                @endif
+                            </x-table.cell>
+                        </x-table.row>
+                    </x-table.body>
+                </x-table>
+            </div>
             <div class="mt-2 flex justify-end w-full">
                 <x-button type="submit">{{ __('Next') }}</x-button>
             </div>
