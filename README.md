@@ -1,5 +1,7 @@
 # L'amorce Management Web Application
 
+[![Laravel Forge Site Deployment Status](https://img.shields.io/endpoint?url=https%3A%2F%2Fforge.laravel.com%2Fsite-badges%2Fa5c038e0-b9a5-43a4-b23b-a7e3a8a5644c%3Flabel%3D1&style=plastic)](https://forge.laravel.com/servers/851254/sites/2588882)
+
 This repository contains the source code for a **web application** designed to streamline the internal management of the non-profit, [l'amorce](https://lamorce.be/). The application aims to centralize and automate key processes, ensuring transparency, accuracy, and efficiency in managing funds, donations, and other operational tasks.
 
 ---
