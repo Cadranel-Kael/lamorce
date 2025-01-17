@@ -1,5 +1,5 @@
-<div class="bg-white p-6 flex-col flex gap-7 w-fit">
-    <h2 class="text-xl font-bold">Upcoming session</h2>
+<div class="bg-white p-6 flex-col flex gap-7 w-fit rounded shadow">
+    <h2 class="text-xl font-bold">{{ $title }}</h2>
     <div class="flex gap-7" wire:poll>
         <div class="bg-white shadow p-5 flex flex-col items-center">
             <div class="text-2xl">{{ $this->daysUntil }}</div>
@@ -17,5 +17,5 @@
             </div>
         </div>
     </div>
-    <x-button-primary>Change Time and Day</x-button-primary>
+{{--    <x-button-primary>Change Time and Day</x-button-primary>--}}
 </div>

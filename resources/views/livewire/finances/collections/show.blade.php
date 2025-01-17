@@ -7,13 +7,18 @@
         <div>{{ $collection->type->name }}</div>
     </div>
     <livewire:collection-overview class="mb-11" :total="$collection->amount()" :desc="$collection->description"/>
+    @if($graphLabels && $graphValues)
+        <livewire:chart :labels="$graphLabels" :values="$graphValues"/>
+    @endif
     <h2 class="mb-7 font-bold text-xl">{{ __('Latest Transactions') }}</h2>
     @foreach($transactions as $transaction)
         <div class="rounded bg-white mb-4 last:mb-0 shadow p-4 justify-center">
             <div class="flex items-center justify-between">
                 <h3 class="font-bold text-xl">{{ $transaction->name() }}</h3>
-                <div class="@if($transaction->incoming_collection_id === $collection->id) text-error-600 @endif text-2xl">
-                    {{ $transaction->incoming_collection_id === $collection->id ? '-' : '+'}} {{ format_currency($transaction->amount) }} €
+                <div
+                    class="@if($transaction->incoming_collection_id === $collection->id) text-error-600 @endif text-2xl">
+                    {{ $transaction->incoming_collection_id === $collection->id ? '-' : '+'}} {{ format_currency($transaction->amount) }}
+                    €
                 </div>
             </div>
             <div class="flex justify-between items-center">

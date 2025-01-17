@@ -5,13 +5,15 @@ namespace App\Livewire;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
-class UpcomingDetente extends Component
+class MandateCountdown extends Component
 {
     public $dateTime;
+    public $title;
 
-    public function mount($dateTime)
+    public function mount($dateTime, $title)
     {
         $this->dateTime = $dateTime;
+        $this->title = $title ?? 'Mandate Countdown';
     }
 
     #[Computed]
@@ -40,6 +42,6 @@ class UpcomingDetente extends Component
 
     public function render()
     {
-        return view('livewire.upcoming-detente');
+        return view('livewire.mandate-countdown');
     }
 }

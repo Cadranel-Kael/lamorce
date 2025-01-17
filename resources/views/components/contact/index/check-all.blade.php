@@ -9,10 +9,10 @@
     Alpine.data('checkAll', () => {
         return {
             init() {
-                this.$wire.$watch('selectedContactIds', () => {
+                this.$wire.$watch('selectedItems', () => {
                     this.updateCheckAllState();
                 });
-                this.$wire.$watch('contactIdsOnPage', () => {
+                this.$wire.$watch('itemsOnPage', () => {
                     this.updateCheckAllState();
                 });
             },
@@ -31,11 +31,11 @@
             },
 
             pageIsSelected() {
-                return this.$wire.contactIdsOnPage.every(id => this.$wire.selectedContactIds.includes(id));
+                return this.$wire.itemsOnPage.every(id => this.$wire.selectedItems.includes(id));
             },
 
             pageIsEmpty() {
-                return this.$wire.selectedContactIds.length === 0;
+                return this.$wire.selectedItems.length === 0;
             },
 
             handleCheck(e) {
@@ -43,15 +43,15 @@
             },
 
             selectAll() {
-                this.$wire.contactIdsOnPage.forEach(id => {
-                    if (this.$wire.selectedContactIds.includes(id)) return;
+                this.$wire.itemsOnPage.forEach(id => {
+                    if (this.$wire.selectedItems.includes(id)) return;
 
-                    this.$wire.selectedContactIds.push(id);
+                    this.$wire.selectedItems.push(id);
                 });
             },
 
             deselectAll() {
-                this.$wire.selectedContactIds = [];
+                this.$wire.selectedItems = [];
             }
         }
     })

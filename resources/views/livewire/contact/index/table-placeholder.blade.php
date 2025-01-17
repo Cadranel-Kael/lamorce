@@ -11,7 +11,7 @@
         </div>
         <div class="flex gap-5">
             <x-button class="flex gap-1 items-center">
-                <x-icon.mini-arrow-down-tray class="size-4"/>
+                <x-icon.mini.arrow-down-tray class="size-4"/>
                 Export
             </x-button>
         </div>
